@@ -1,0 +1,48 @@
+@page "/inout"
+
+<PageTitle>InOut</PageTitle>
+
+<h1>Ein- und Ausgabe</h1>
+
+@code{
+        private int zeilen = 5;
+        private Random rand = new Random();
+    } 
+
+<br>
+Wie viele Zeilen sollen ausgegeben werden: <input class="" type="text" @bind="zeilen">  
+
+<button class="btn btn-primary" @onclick="NeuZeichnen">Zeichnen</button>
+
+<br>
+
+@code{
+        private void NeuZeichnen()
+           {
+                //
+           } 
+              
+}
+
+<table class="table">
+                <thead>
+                    <tr>
+                        <th>Zeit</th>
+                        <th>Zeile</th>
+                        <th>Integer ( [0-100[ )</th>
+                        <th>Single ( [0-1[ )</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @for(int counter = 0; counter < zeilen; counter++)
+                    {
+                        <tr>
+                            <td>@DateTime.Now</td>
+                            <td>@(counter+1)</td>
+                            <td>@rand.Next(100)</td>
+                            <td>@rand.NextSingle()</td>
+                        </tr>
+                    }
+                </tbody>
+</table>   
+           

@@ -1,0 +1,53 @@
+@page "/bank"
+
+@using BankCode;
+
+
+<PageTitle>Bank</PageTitle>
+
+<h1>Bankaccount von @account.Owner </h1> 
+
+<h4 align="right">Kontostand: @account.Balance</h4>
+
+
+<br>
+<button class="btn btn-primary" @onclick="buchen">Buchungen Anzeigen</button>
+
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Bemerkung</th>
+                        <th>Umsatz</th>
+                    </tr>
+                </thead>
+                <tbody>
+               @foreach(Transaction item in account.allTransactions)
+                    {
+                       <tr>
+                            <td>@item.Notes</td>
+                            <td>@item.Amount</td>        
+                       </tr> 
+
+                    }    
+                </tbody>
+            </table>   
+
+
+
+
+
+@code{ 
+        public BankAccount account = new BankAccount("Ulf",1000);
+        public void startbank()
+        {
+            //
+        } 
+        public void buchen()
+        { 
+             account.MakeDeposit(500, DateTime.Now, "Lohnzahlung");
+             account.MakeDeposit(100, DateTime.Now, "Rückzahlung von Freund");
+             account.MakeWithdrawal(200, DateTime.Now, "Handykosten");
+ 
+        } 
+}
