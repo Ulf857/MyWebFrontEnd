@@ -5,48 +5,78 @@
 
 <PageTitle>Bank</PageTitle>
 
+@code{
+    private decimal betrag= 0;
+    private string notiz= "Notiz";
+    private BankAccount account = new BankAccount("Ulf",1000);
+}
+
+
 <h1>Bankaccount von @account.Owner </h1> 
 
 <h4 align="right">Kontostand: @account.Balance</h4>
 
 
+<table class="table">
+    <thead>
+            <tr>
+                <th>Buchungsart</th>
+                <th>Betrag</th>
+                <th>Notiz</th>
+                <th>Aktion</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><select name="Transaktion">
+                        <option>Einzahlung</option>
+                        <option>Auszahlung</option>
+                    </select>
+                </td>
+                <td>
+                    <input class="" type="text" @bind="betrag"> 
+                </td>
+                <td>
+                    <input class="" type="text" @bind="notiz">  
+                </td>
+                <td>
+                    <button class="btn btn-primary" type="submit" @onclick="buchen">Verbuchungen</button>
+                </td>
+            </tr> 
+        </tbody>
+</table>
+
 <br>
-<button class="btn btn-primary" @onclick="buchen">Buchungen Anzeigen</button>
+<br>
 
+<h1>Auswahl: </h1> 
 
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Bemerkung</th>
-                        <th>Umsatz</th>
-                    </tr>
-                </thead>
-                <tbody>
-               @foreach(Transaction item in account.allTransactions)
-                    {
-                       <tr>
-                            <td>@item.Notes</td>
-                            <td>@item.Amount</td>        
-                       </tr> 
+<table class="table">
+    <thead>
+        <tr>
+            <th>Bemerkung</th>
+            <th>Umsatz</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach(Transaction item in account.allTransactions)
+        {
+            <tr>
+                <td>@item.Notes</td>
+                <td>@item.Amount</td>        
+            </tr> 
 
-                    }    
-                </tbody>
-            </table>   
-
-
+        }    
+    </tbody>
+</table>   
 
 
 
 @code{ 
-        public BankAccount account = new BankAccount("Ulf",1000);
-        public void startbank()
-        {
-            //
-        } 
         public void buchen()
         { 
-             account.MakeDeposit(500, DateTime.Now, "Lohnzahlung");
-             account.MakeDeposit(100, DateTime.Now, "Rückzahlung von Freund");
+             //account.MakeDeposit(500, DateTime.Now, "Lohnzahlung");
+             //account.MakeDeposit(100, DateTime.Now, "Rückzahlung von Freund");
              account.MakeWithdrawal(200, DateTime.Now, "Handykosten");
  
         } 
