@@ -1,0 +1,46 @@
+@page "/alter"
+
+
+@namespace Person
+
+
+<PageTitle>Alter</PageTitle>
+
+<h1>Wie alt sind Sie?</h1> 
+
+
+<EditForm Model="@person" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <InputText id="name" @bind-Value="person.name"></InputText>
+    <InputDate id="geboren" @bind-Value="person.geboren"></InputDate>
+
+    <button type="submit">Berechnen</button>
+
+    <h4>@person.name</h4>
+
+</EditForm>
+
+
+@code{
+
+    private Person person= new Person();  
+    //public Person person {get; set; } 
+    
+    protected override void OnInitialized()
+    {
+        person= new Person();
+        base.OnInitialized();
+    }
+
+
+    private void HandleValidSubmit()
+    {
+        //<h4>Hallo Test</h4>
+        
+    } 
+
+} 
+
+
