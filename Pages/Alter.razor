@@ -6,39 +6,62 @@
 
 <PageTitle>Alter</PageTitle>
 
-<h1>Wie alt sind Sie?</h1> 
+<h1>Brechnung des Alters</h1> 
 
 
 <EditForm Model="@person" OnValidSubmit="@HandleValidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
-    <InputText id="name" @bind-Value="person.name"></InputText>
-    <InputDate id="geboren" @bind-Value="person.geboren"></InputDate>
+    <table class="table">
+        <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Geburtsdatum</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <InputText id="Name" @bind-Value="person.name"></InputText>
+                    </td>
+                    <td>
+                        <InputDate id="Geboren" @bind-Value="person.geboren"></InputDate>  
+                    </td>
+                </tr> 
+            </tbody>
+    </table>
 
-    <button type="submit">Berechnen</button>
+    
+    <button class="btn btn-primary" type="submit" @onclick="berechnen">Berechnen</button>
+    <button class="btn btn-primary" type="reset">Reset</button>
 
-    <h4>@person.name</h4>
+    <p role="status">Alter: @person.jahrealt()</p>
 
 </EditForm>
 
 
 @code{
 
-    private Person person= new Person();  
-    //public Person person {get; set; } 
-    
+    private Person person= new Person(); 
+        
     protected override void OnInitialized()
     {
-        person= new Person();
+        //private Person person= new Person();
+        //person= new Person();
         base.OnInitialized();
     }
 
 
     private void HandleValidSubmit()
     {
-        //<h4>Hallo Test</h4>
-        
+        //
+    } 
+
+       
+    private void berechnen()
+    {
+        //
     } 
 
 } 

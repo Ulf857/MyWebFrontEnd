@@ -10,7 +10,8 @@ class Person
             ErrorMessage = "Maximal 15 Buchstaben!")] 
         public string name {get; set;}
         
-        [Required] 
+        [Required]
+        [Range(typeof(DateTime),"01.01.1900","31.12.2021", ErrorMessage = "Gültig ist 1900 bis 2021!")]  
         public DateTime geboren {get; set;}
 
         private const int TageimJahr = 365;
@@ -19,7 +20,7 @@ class Person
         public Person()
         {
             this.name= "";
-            this.geboren= DateTime.MinValue;
+            this.geboren= DateTime.Parse("01.01.2000");
         }  
 
         public int jahrealt()
