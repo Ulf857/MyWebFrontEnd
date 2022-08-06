@@ -9,7 +9,7 @@
 <h1>Brechnung des Alters</h1> 
 
 
-<EditForm Model="@person" OnValidSubmit="@HandleValidSubmit">
+<EditForm Model="@person" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
@@ -18,6 +18,8 @@
                 <tr>
                     <th>Name</th>
                     <th>Geburtsdatum</th>
+                    <th>Aktion</th>
+                    <th>Alter</th>
                 </tr>
             </thead>
             <tbody>
@@ -28,22 +30,25 @@
                     <td>
                         <InputDate id="Geboren" @bind-Value="person.geboren"></InputDate>  
                     </td>
+                    <td>
+                        <button class="btn btn-primary" type="submit">Berechnen</button>
+                    </td>
+                    <td>
+                        @ergalter
+                    </td>
                 </tr> 
             </tbody>
     </table>
 
     
-    <button class="btn btn-primary" type="submit" @onclick="berechnen">Berechnen</button>
-    <button class="btn btn-primary" type="reset">Reset</button>
-
-    <p role="status">Alter: @person.jahrealt()</p>
-
 </EditForm>
 
 
 @code{
 
     private Person person= new Person(); 
+    private int ergalter= 0;
+  
         
     protected override void OnInitialized()
     {
@@ -55,15 +60,15 @@
 
     private void HandleValidSubmit()
     {
-        //
+        ergalter= person.jahrealt();        
     } 
 
-       
-    private void berechnen()
+    private void HandleInvalidSubmit()
     {
-        //
+        ergalter= 0;
     } 
-
+       
+ 
 } 
 
 
