@@ -5,65 +5,70 @@
 
 <PageTitle>Bank</PageTitle>
 
-@code{
-    private decimal betrag= 0;
-    private string notiz= "Notiz";
-    private BankAccount account = new BankAccount("Ulf",1000);
-}
 
 
-<h1>Bankaccount von @account.Owner </h1> 
+<h1>Bankaccount von @account.Owner</h1> 
 
 <h4 align="right">Kontostand: @account.Balance</h4>
 
 
-<table class="table">
-    <thead>
-            <tr>
-                <th>Buchungsart</th>
-                <th>Betrag</th>
-                <th>Notiz</th>
-                <th>Aktion</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><select name="Transaktion">
-                        <option>Einzahlung</option>
-                        <option>Auszahlung</option>
-                    </select>
-                </td>
-                <td>
-                    <input class="" type="text" @bind="betrag"> 
-                </td>
-                <td>
-                    <input class="" type="text" @bind="notiz">  
-                </td>
-                <td>
-                    <button class="btn btn-primary" type="submit" @onclick="buchen">Verbuchungen</button>
-                </td>
-            </tr> 
-        </tbody>
-</table>
+<EditForm Model="@eingabe" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <table class="table">
+        <thead>
+                <tr>
+                    <th>Buchungsart</th>
+                    <th>Betrag</th>
+                    <th>Notiz</th>
+                    <th>Aktion</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                     <td>
+                        <InputSelect id="Buchungsart" @bind-Value="eingabe.einzahlung">
+                            <option value="true">Einzahlung</option>
+                            <option value="false">Auszahlung</option>
+                        </InputSelect>
+                        <ValidationMessage For="() => eingabe.einzahlung" />
+                    </td>
+                    <td> 
+                        <InputNumber id="Betrag" @bind-Value="eingabe.Betrag"></InputNumber>
+                    </td>
+                    <td>
+                        <InputText id="Geboren" @bind-Value="eingabe.Notiz"></InputText>  
+                    </td>
+                    <td>
+                        <button class="btn btn-primary" type="submit">Verbuchen</button>
+                    </td>
+                </tr> 
+            </tbody>
+    </table>
+
+</EditForm>
 
 <br>
 <br>
 
-<h1>Auswahl: </h1> 
+
 
 <table class="table">
     <thead>
         <tr>
-            <th>Bemerkung</th>
-            <th>Umsatz</th>
+            <th>Betrag</th>
+            <th>Notiz</th>
+            <th>Buchungsdatum</th>
         </tr>
     </thead>
     <tbody>
     @foreach(Transaction item in account.allTransactions)
         {
             <tr>
-                <td>@item.Notes</td>
-                <td>@item.Amount</td>        
+                <td>@item.Amount</td>
+                <td>@item.Notes</td>        
+                <td>@item.Date </td>
             </tr> 
 
         }    
@@ -72,12 +77,24 @@
 
 
 
+
+
 @code{ 
-        public void buchen()
-        { 
-             //account.MakeDeposit(500, DateTime.Now, "Lohnzahlung");
-             //account.MakeDeposit(100, DateTime.Now, "Rückzahlung von Freund");
-             account.MakeWithdrawal(200, DateTime.Now, "Handykosten");
- 
-        } 
+
+    private BankAccount account = new BankAccount("Ulf",1000);
+    private Eingabe eingabe = new Eingabe();
+
+
+    private void HandleValidSubmit()
+    {
+        if (eingabe.einzahlung) account.MakeDeposit(eingabe.Betrag, DateTime.Now, eingabe.Notiz);
+            else account.MakeWithdrawal(eingabe.Betrag, DateTime.Now, eingabe.Notiz);
+    } 
+
+    private void HandleInvalidSubmit()
+    {
+        //
+    } 
+
+
 }

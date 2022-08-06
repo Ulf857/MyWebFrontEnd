@@ -1,13 +1,31 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace BankCode
 { 
+    public class Eingabe
+    {
+        public bool einzahlung {get; set; } 
+        
+        [Required] 
+        [Range(0.01, 1000000,
+            ErrorMessage= "Betrag zwischen 0,01 Euro und 1 Mio. Euro!")]  
+        public decimal Betrag {get; set; } 
+        
+        [Required]
+        public string Notiz {get; set; } 
+
+    } 
+
+
 
     public class Transaction
     {
         // Properties
         public decimal Amount { get; }
+        
         public DateTime Date { get; }
+        
         public string Notes { get; }
 
         // Constructor
@@ -82,12 +100,6 @@ namespace BankCode
             var withdrawal = new Transaction(-amount, date, note);
             allTransactions.Add(withdrawal);
         }
-        public void ShowTransactions()
-       {
-            foreach(Transaction item in allTransactions)
-            {
-                Console.WriteLine($"{item.Notes}: Betrag: {item.Amount}");
-            } 
-       } 
+
     }
 }
