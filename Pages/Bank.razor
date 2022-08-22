@@ -87,8 +87,14 @@
 
     private void HandleValidSubmit()
     {
-        if (eingabe.einzahlung) account.MakeDeposit(eingabe.Betrag, DateTime.Now, eingabe.Notiz);
-            else account.MakeWithdrawal(eingabe.Betrag, DateTime.Now, eingabe.Notiz);
+        if (eingabe.einzahlung)
+            {
+                account.MakeDeposit(eingabe.Betrag, DateTime.Now, eingabe.Notiz);
+            } 
+            else 
+            { 
+                if (eingabe.Betrag <= account.Balance) account.MakeWithdrawal(eingabe.Betrag, DateTime.Now, eingabe.Notiz);
+            } 
     } 
 
     private void HandleInvalidSubmit()
