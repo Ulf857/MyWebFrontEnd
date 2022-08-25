@@ -1,15 +1,17 @@
 @page "/bank"
 
-@using BankCode;
+@using BankCode
+
+@inject BankAccountService BAS
 
 
 <PageTitle>Bank</PageTitle>
 
 
 
-<h1>Bankaccount von @account.Owner</h1> 
+<h1>Bankaccount von @BAS.Owner</h1> 
 
-<h4 align="right">Kontostand: @account.Balance</h4>
+<h4 align="right">Kontostand: @BAS.Balance</h4>
 
 
 <EditForm Model="@eingabe" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit">
@@ -63,7 +65,7 @@
         </tr>
     </thead>
     <tbody>
-    @foreach(Transaction item in account.allTransactions)
+    @foreach(Transaction item in BAS.allTransactions)
         {
             <tr>
                 <td>@item.Amount</td>
@@ -77,18 +79,14 @@
 
 
 
-
-
 @code{ 
-
-    private BankAccount account = new BankAccount("Ulf",1000);
-    private Eingabe eingabe = new Eingabe();
-
+    
+    private Eingabe eingabe = new Eingabe();   
 
     private void HandleValidSubmit()
     {
-        if (eingabe.einzahlung) account.MakeDeposit(eingabe.Betrag, DateTime.Now, eingabe.Notiz);
-            else account.MakeWithdrawal(eingabe.Betrag, DateTime.Now, eingabe.Notiz);
+        if (eingabe.einzahlung) BAS.MakeDeposit(eingabe.Betrag, DateTime.Now, eingabe.Notiz);
+            else BAS.MakeWithdrawal(eingabe.Betrag, DateTime.Now, eingabe.Notiz);
     } 
 
     private void HandleInvalidSubmit()

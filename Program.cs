@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
 using Besucher;
+using BankCode;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddScoped<BesucherServiceSession , BesucherServiceSession >();
 builder.Services.AddSingleton<BesucherServiceGesamt , BesucherServiceGesamt >();
+builder.Services.AddScoped<BankAccountService, BankAccountService>();
 
 
 var app = builder.Build();
