@@ -1,9 +1,28 @@
 ﻿@page "/"
 
+@using Besucher;
+
+@inject BesucherServiceSession BSS
+@inject BesucherServiceGesamt BSG
+
+
 <PageTitle>Index</PageTitle>
 
 <h1>Web Benutzeroberfläche</h1>
 
-Hier sollen verschiedene Unterseiten mit Frontends zur Bedienung von c#-Programmen entstehen...
+<h2>Hier sollen verschiedene Unterseiten mit Frontends zur Bedienung von c#-Programmen entstehen...</h2>
+
+<h4>Diese Seite wurde während der Laufzeit der App @BSG.BesucheraufSeite mal geladen.</h4>
+<h4>Diese Seite wurde in dieser Benutzersession @BSS.BesucheraufSeite mal geladen.</h4>
 
 
+
+@code
+{
+    protected override void OnInitialized()
+    {
+        BSG.Hochzaehlen();
+        BSS.Hochzaehlen();
+        base.OnInitialized();
+    }
+}

@@ -1,11 +1,15 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
+using Besucher;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
+builder.Services.AddScoped<BesucherServiceSession , BesucherServiceSession >();
+builder.Services.AddSingleton<BesucherServiceGesamt , BesucherServiceGesamt >();
 
 
 var app = builder.Build();

@@ -1,8 +1,7 @@
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace BankCode
-{ 
+{
     public class Eingabe
     {
         public bool einzahlung {get; set; } 
