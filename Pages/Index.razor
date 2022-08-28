@@ -8,23 +8,24 @@
 
 
 <PageTitle>Index</PageTitle>
->>>>>>> Webseiteninhalte-beibehalten-(Persistenz)
+
 
 <h1>Web Benutzeroberfläche</h1>
 
-<br>
-<h5>Die aktuelle Kultur ist: @CultureInfo.CurrentCulture.Name</h5>
-<h5>Die aktuelle UI-Kultur ist: @CultureInfo.CurrentUICulture.Name</h5>
-<br>
-<h5>Datum und Urzeit in der aktuellen Kultur: @DateTime.Now</h5>
-<br>
 
 
 
 <h2>Hier sollen verschiedene Unterseiten mit Frontends zur Bedienung von c#-Programmen entstehen...</h2>
 
-<h4>Diese Seite wurde während der Laufzeit der App @BSG.BesucheraufSeite mal geladen.</h4>
-<h4>Diese Seite wurde in dieser Benutzersession @BSS.BesucheraufSeite mal geladen.</h4>
+<br>
+<h5>Die aktuelle Kultur ist: @CultureInfo.CurrentCulture.Name</h5>
+<h5>Die aktuelle UI-Kultur ist: @CultureInfo.CurrentUICulture.Name</h5>
+<br>
+<h5>Datum und Uhrzeit in der aktuellen Kultur: @DateTime.Now</h5>
+<br>
+
+<h4>Diese Seite wurde während der Laufzeit (AddSingelton) der App @BSG.BesucheraufSeite mal geladen.</h4>
+<h4>Diese Seite wurde in dieser Benutzersession (AddScoped) @BSS.BesucheraufSeite mal geladen.</h4>
 
 
 @code
@@ -33,6 +34,6 @@
     {
         BSG.Hochzaehlen();
         BSS.Hochzaehlen();
-        base.OnInitialized();
+        //base.OnInitialized();
     }
 }
