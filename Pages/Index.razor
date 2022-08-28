@@ -1,14 +1,16 @@
 ﻿@page "/"
 
 @using System.Globalization;
+@using Besucher
+
+@inject BesucherServiceSession BSS
+@inject BesucherServiceGesamt BSG
 
 
 <PageTitle>Index</PageTitle>
+>>>>>>> Webseiteninhalte-beibehalten-(Persistenz)
 
 <h1>Web Benutzeroberfläche</h1>
-<br>
-<h4>Hier sollen verschiedene Unterseiten mit Frontends zur Bedienung von c#-Programmen entstehen...</h4>
-<br>
 
 <br>
 <h5>Die aktuelle Kultur ist: @CultureInfo.CurrentCulture.Name</h5>
@@ -16,3 +18,21 @@
 <br>
 <h5>Datum und Urzeit in der aktuellen Kultur: @DateTime.Now</h5>
 <br>
+
+
+
+<h2>Hier sollen verschiedene Unterseiten mit Frontends zur Bedienung von c#-Programmen entstehen...</h2>
+
+<h4>Diese Seite wurde während der Laufzeit der App @BSG.BesucheraufSeite mal geladen.</h4>
+<h4>Diese Seite wurde in dieser Benutzersession @BSS.BesucheraufSeite mal geladen.</h4>
+
+
+@code
+{
+    protected override void OnInitialized()
+    {
+        BSG.Hochzaehlen();
+        BSS.Hochzaehlen();
+        base.OnInitialized();
+    }
+}

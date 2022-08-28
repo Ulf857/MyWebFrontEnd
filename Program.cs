@@ -1,11 +1,17 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
+using Besucher;
+using BankCode;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
+builder.Services.AddScoped<BesucherServiceSession , BesucherServiceSession >();
+builder.Services.AddSingleton<BesucherServiceGesamt , BesucherServiceGesamt >();
+builder.Services.AddScoped<BankAccountService, BankAccountService>();
 
 builder.Services.AddLocalization();  //Service zum Aendern der Kultur zugefuegt
 

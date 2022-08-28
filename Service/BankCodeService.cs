@@ -1,8 +1,7 @@
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace BankCode
-{ 
+{
     public class Eingabe
     {
         public bool einzahlung {get; set; } 
@@ -38,7 +37,7 @@ namespace BankCode
     }
 
 
-    public class BankAccount
+    public class BankAccountService
     {
         // Properties
         public string Number { get; }
@@ -63,7 +62,7 @@ namespace BankCode
         public List<Transaction> allTransactions = new List<Transaction>();
 
         // Constructor
-        public BankAccount(string name, decimal initialBalance)
+        public BankAccountService(string name= "Ulf", decimal initialBalance= 1000)
         {
 
             this.Owner = name;

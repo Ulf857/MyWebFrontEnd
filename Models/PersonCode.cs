@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Person
+namespace PersonCode
 {
 
 class Person
